@@ -8,9 +8,9 @@ const getAllEvents = async (req, res) => {
 const createEvent = async (req, res, next) => {
   try {
     const event = await eventsModel.create(req.body);
-    res.status(201).json({ event });
+    res.status(201).json({ msg: `Registration was successful` });
   } catch (error) {
-    console.log(error);
+    res.status(400).json(error.errors);
   }
 };
 
@@ -22,7 +22,7 @@ const deleteEvent = async (req, res, next) => {
     return res.status(404).json({ msg: `No event with id : ${EventID}` });
   }
 
-  res.status(200).json({ event });
+  res.status(200).json({ msg: `Event with id: ${EventID} was deleted` });
 };
 
 module.exports = {
