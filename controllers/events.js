@@ -7,7 +7,10 @@ const getAllEvents = async (req, res) => {
 
 const createEvent = async (req, res, next) => {
   try {
-    const event = await eventsModel.create(req.body);
+    const { name, cities, courses } = req.body;
+    const eventBody = { name, city: cities, course: courses };
+
+    const event = await eventsModel.create(eventBody);
     res.status(201).json({ msg: `Registration was successful` });
   } catch (error) {
     res.status(400).json(error.errors);
